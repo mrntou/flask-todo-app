@@ -1,0 +1,109 @@
+{% extends '__base.html' %}
+{% block content %}
+ 
+    <h1>What do yo have planned ?</h1>
+    <form class="fs-5 col-md-8" action="" method="post">
+      {{ form.hidden_tag() }}
+      <div class="form-group">
+        {{ form.title(class='form-control', placeholder='Task ') }}
+      </div>
+
+
+
+    <div class="mb-5 my-3">
+      {{ form.submit(class='btn btn-primary btn-lg px-4') }}
+    </div>
+    </form>
+
+
+    <hr class="col-3 col-md-2 mb-5">
+
+    <div class="row g-5">
+      <div class="col-md-6">
+        <h2>Tasks</h2>
+        <table class="table table-hover table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Task</th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for todo in todos %}
+            {% if not todo.complete %}
+            <tr>
+              <th scope="row">1</th>
+              <td>{{todo.title}}</td>
+              <td>
+                <a href="{{ url_for('complete_todo', todo_id=todo.id, complete='true') }}" class="btn btn-primary btn-sm">Complete</a>
+              
+              </td>
+              <td>
+                <div class="dropdown">
+                <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                  aria-expanded="false">
+              
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+              </div>
+            </td>
+              
+            </tr>
+            {% endif %}
+            {% endfor %}
+            
+           
+          </tbody>
+        </table>
+      </div>
+
+      <div class="col-md-6">
+        <h2>Completed</h2>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Task</th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for todo in todos %}
+            {% if todo.complete %}
+            <tr>
+              <th scope="row">1</th>
+              <td class="text-success">{{todo.title}}</td>
+              <td>
+        
+              </td>
+              <td>
+                <div class="dropdown">
+                  <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton1"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+        
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a href="{{ url_for('complete_todo', todo_id=todo.id, complete='false') }}" class="dropdown-item" href="#">Not Complete</a></li>
+                    <li><a class="dropdown-item" href="#">Delete</a></li>
+                  </ul>
+                </div>
+              </td>
+        
+            </tr>
+            {% endif %}
+            {% endfor %}
+        
+        
+          </tbody>
+        </table>
+      </div>
+    </div>
+  
+    {% endblock %}
