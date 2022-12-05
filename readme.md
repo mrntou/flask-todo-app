@@ -28,6 +28,6 @@ Create user for app and run
 flask create_user
 ```
 
-````
+```
 flask run
 ```
