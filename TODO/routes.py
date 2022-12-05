@@ -32,8 +32,9 @@ def logout():
     return redirect(url_for('login'))
 
 @app.route('/', methods=['GET','POST'])
-@login_required
 def index():
+    if not current_user.is_authenticated:
+        return redirect(url_for('login'))
     form = TodoForm()
     todos = Todo.query.order_by(Todo.id.desc()).all()
     if form.validate_on_submit():
