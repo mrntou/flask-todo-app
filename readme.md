@@ -1,5 +1,5 @@
 ## Simple Flask ToDo App with Login
-
+![](https://github.com/mrntou/flask-todo-app/blob/master/todogif.gif)
 ### Setup
 Create python virtual environment and activate it
 
