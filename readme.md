@@ -23,7 +23,11 @@ pip install -r requirements.txt
 
 ### Usage
 
-Create user for app
+Create user for app and run
 ```
 flask create_user
+```
+
+````
+flask run
 ```
