@@ -1,0 +1,22 @@
+{% extends '__base.html' %}
+{% block content %}
+
+<h1>Edit task</h1>
+<form class="fs-5 col-md-8" action="" method="post">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+        {{ form.title(class='form-control', placeholder='Task ') }}
+    </div>
+
+
+
+    <div class="mb-5 my-3">
+        <input type="submit" value="Edit", class="btn btn-primary btn-lg px-4">
+    </div>
+</form>
+
+
+<hr class="">
+
+
+{% endblock %}

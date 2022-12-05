@@ -11,7 +11,6 @@ from TODO.forms import TodoForm, LoginForm
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-   
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
@@ -51,3 +50,27 @@ def complete_todo(todo_id):
     db.session.commit()
     
     return redirect(url_for('index'))
+
+
+@app.route('/todo/delete/<int:todo_id>', methods=['GET', 'POST'])
+def delete_todo(todo_id):
+    todo = Todo.query.get_or_404(todo_id)
+    db.session.delete(todo)
+    db.session.commit()
+    return redirect(url_for('index'))
+
+
+@app.route('/todo/edit/<int:todo_id>', methods=['GET', 'POST'])
+def edit_todo(todo_id):
+    todo = Todo.query.get_or_404(todo_id)
+    form = TodoForm()
+    if form.validate_on_submit():
+        todo.title = form.title.data
+        db.session.commit()
+        return redirect(url_for('index'))
+
+    if request.method == 'GET':
+        form.title.data = todo.title
+
+
+    return render_template('edit_todo.html', todo=todo, form=form)
